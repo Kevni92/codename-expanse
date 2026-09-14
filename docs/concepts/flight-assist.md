@@ -1,7 +1,7 @@
 # Flight Assist
 
-**Status:** Review  
-**Version:** 0.1  
+**Status:** Approved  
+**Version:** 1.0  
 **Owner:** Concept / Game Design  
 **Last Updated:** 2026-09-14
 
@@ -353,4 +353,5 @@ Exact control tolerances and algorithms belong to technical architecture/balance
 
 | Version | Date | Change |
 | --- | --- | --- |
+| 1.0 | 2026-09-14 | Approved by the project owner after concept review. |
 | 0.1 | 2026-09-14 | Initial Flight Assist concept produced from structured design session and consistency review. |
