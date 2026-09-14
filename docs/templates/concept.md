@@ -7,6 +7,9 @@
 
 **Related Documents:**
 - [Example Related Concept](../concepts/example.md)
+- [Example Requiring Feature](../features/example.md)
+
+> **Concept ownership rule:** This document defines the intended final-game behaviour of its system. It must not encode temporary prototype or Milestone shortcuts as permanent gameplay rules. If this system is only partially delivered in a Milestone, the Milestone scopes the delivery; this Concept still describes the complete intended system.
 
 ## Table of Contents
 
@@ -31,19 +34,21 @@
 19. [Change Log](#change-log)
 
 ## Purpose
-Explain why this system exists, what player/gameplay problem it solves and what value it adds to the game.
+Explain why this final-game system exists, what player/gameplay problem it solves and what value it adds.
 
 ## Design Goals
-List the outcomes this concept is intentionally designed to achieve. Goals should help evaluate later proposals and trade-offs.
+List the outcomes this Concept is intentionally designed to achieve. Goals should help evaluate later proposals and trade-offs.
 
 - **G-<SHORT>-001:** ...
 - **G-<SHORT>-002:** ...
 
 ## Scope
-Define what this concept owns normatively.
+Define what this Concept owns normatively in the intended final game.
+
+Do not reduce Concept scope solely because an early Milestone implements only part of it.
 
 ## Out of Scope
-Define what this concept explicitly does not own. Link to the owning concept when known.
+Define what this Concept explicitly does not own. Link to the owning Concept when known.
 
 ## Terminology
 Use canonical project terminology consistently.
@@ -58,7 +63,7 @@ Describe what the player perceives, understands, decides and does. Explain inten
 ## Functional Design
 Describe the complete intended behaviour of the system. Use subsections for distinct capabilities and flows.
 
-The design must be precise enough that multiple readers derive the same gameplay behaviour.
+The design must be precise enough that multiple readers derive the same gameplay behaviour and downstream Features do not need to invent missing system rules.
 
 ## Rules and Invariants
 Number important normative rules so other documents can reference them directly.
@@ -66,7 +71,7 @@ Number important normative rules so other documents can reference them directly.
 1. **C-<SHORT>-001:** ...
 2. **C-<SHORT>-002:** ...
 
-Rules should describe gameplay truth, not implementation technique.
+Rules should describe gameplay truth, not implementation technique or temporary Milestone constraints.
 
 ## Parameters and Initial Values
 Define concept-level values/ranges required to make intended behaviour concrete. Mark balance values as tunable where appropriate. Technical architecture will define executable representation and ownership.
@@ -84,12 +89,14 @@ Define relevant states, triggers, transitions and forbidden transitions when the
 | --- | --- | --- | --- |
 | ... | ... | ... | ... |
 
-If the concept has no meaningful state model, state that explicitly.
+If the Concept has no meaningful state model, state that explicitly.
 
 ## Interactions With Other Systems
-Link to the normative owner of each related rule instead of duplicating it.
+Link to the normative owner of each related gameplay rule instead of duplicating it.
 
 - [Related Concept](../concepts/example.md) — describe the interaction boundary and which document owns which rule.
+
+Feature documents may later compose these Concept interactions into broader player-facing capabilities, but gameplay rules still belong here or in another owning Concept.
 
 ## Player Feedback and Information
 Describe the information and feedback the player requires to understand and use the system correctly.
@@ -101,12 +108,12 @@ Cover only design requirements, for example:
 - consequences the player must be able to predict;
 - required feedback after an action.
 
-Detailed UI layout belongs in the appropriate UI/HUD concept.
+Detailed UI layout belongs in the appropriate Concept when UI behaviour itself needs a dedicated owner.
 
 ## Edge Cases
 Enumerate important boundary, failure and unusual situations and define expected gameplay behaviour.
 
-Do not hide unresolved edge cases behind implementation assumptions.
+Do not hide unresolved edge cases behind implementation assumptions or defer them merely because the first Milestone will not exercise them.
 
 ## Examples
 Provide concrete scenarios or calculations where they improve understanding. Examples illustrate the normative rules; they do not override them.
@@ -127,7 +134,7 @@ Record serious alternatives discussed during design when remembering why they we
 | --- | --- | --- |
 | ... | Rejected / Deferred | ... |
 
-`Deferred` means the idea may be reconsidered later. `Rejected` means it currently conflicts with the intended design.
+`Deferred` here means deferred as a design decision, not merely omitted from one Milestone. Milestone-specific delivery deferrals belong in `docs/milestones/**`.
 
 ## Open Questions
 Only unresolved product/gameplay decisions belong here.
@@ -136,7 +143,7 @@ Only unresolved product/gameplay decisions belong here.
 
 For each important open question, explain what decision is missing and what downstream behaviour it affects.
 
-An `Approved` document must not contain implementation-blocking open questions.
+An `Approved` Concept must not contain implementation-blocking gameplay questions.
 
 ## Acceptance Criteria
 Define concept-level, observable criteria that must be true for an implementation to satisfy the intended gameplay.
@@ -144,7 +151,7 @@ Define concept-level, observable criteria that must be true for an implementatio
 - [ ] ...
 - [ ] ...
 
-Acceptance criteria should describe results and behaviour, not code structure.
+Acceptance criteria describe final intended behaviour, not source-code structure or one Milestone's reduced delivery scope.
 
 ## Change Log
 | Version | Date | Change |
