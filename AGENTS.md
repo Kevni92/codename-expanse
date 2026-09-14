@@ -7,20 +7,21 @@ Codename Expanse is a high-quality browser-first prototype for a modern 2D top-d
 The game combines readable arcade controls with a physically grounded simulation. Core themes include large-scale star systems, inertial flight, optional flight assists and autopilot, modular ships with visible hardpoints, long-range combat, layered parallax rendering, stations, NPCs, targeting of ships and subsystems, and a compact HUD.
 
 ## Workspace Responsibility Split
-The project intentionally separates gameplay design from technical delivery.
+The project intentionally separates gameplay/product design from technical delivery.
 
-### ChatGPT owns gameplay design
+### ChatGPT owns gameplay/product design
 ChatGPT is the primary environment for:
 - gameplay ideation and discussion;
-- player-facing rules and system behaviour;
-- gameplay/system concept documents under `docs/concepts/**`;
-- concept cross-linking and handbook structure;
-- gameplay edge cases and acceptance criteria.
+- detailed final-game system rules under `docs/concepts/**`;
+- cross-concept player capabilities under `docs/features/**`;
+- delivery/validation scopes under `docs/milestones/**`;
+- gameplay ownership boundaries, edge cases and acceptance criteria;
+- identification of missing concepts exposed by feature or milestone planning.
 
-The Concept Writer role is primarily used in ChatGPT.
+The Concept Writer role is the main design role used in ChatGPT and follows the repository workflows for Concepts, Features and Milestones.
 
 ### Codex owns technical delivery
-Codex starts from approved gameplay concepts and owns:
+Codex starts from an implementation-ready Milestone backed by approved Features and Concepts and owns:
 - technical architecture under `docs/architecture/**`;
 - ADRs;
 - implementation planning and GitHub Issues;
@@ -28,11 +29,32 @@ Codex starts from approved gameplay concepts and owns:
 - pull-request review and review fixes;
 - QA verification.
 
-Codex must not silently alter approved gameplay behaviour. If a technical conflict requires a gameplay change, return the issue to the gameplay concept stage.
+Codex must not silently alter approved gameplay behaviour. If a technical conflict requires a gameplay change, return the issue to the owning Concept.
 
 Canonical project flow:
 
-`Gameplay Idea → ChatGPT Gameplay Concept → Approved Concept → Codex Technical Architecture → Issues → Implementation → Review → Fixes → QA`
+`Gameplay/Product Idea -> Concepts -> Features -> Milestones -> Codex Technical Architecture -> Issues -> Implementation -> Review -> Fixes -> QA`
+
+## Documentation Layer Ownership
+
+### Concepts
+`docs/concepts/**` is the normative final-game gameplay handbook.
+
+A Concept owns how a game system works in detail. Temporary prototype or milestone scope must not be encoded as alternative concept behaviour.
+
+### Features
+`docs/features/**` composes multiple Concepts into a coherent player-facing capability.
+
+A Feature explains how concept-owned behaviours interact. It must not invent or override gameplay rules that belong to Concepts.
+
+A Feature may identify missing Concepts. Missing required Concepts are created as `Planned` stubs and remain blockers until designed and approved.
+
+### Milestones
+`docs/milestones/**` composes multiple Features into a concrete delivery and validation target.
+
+A Milestone may require only a subset of an otherwise larger Feature, but this only changes delivery scope. It does not modify the Feature or final-game Concepts.
+
+A Milestone may be approved as a scope definition while `Implementation Readiness` is still `Blocked`.
 
 ## Technology Baseline
 - TypeScript is mandatory for production code.
@@ -58,26 +80,40 @@ Canonical project flow:
 13. The browser prototype must not make a later authoritative server architecture unnecessarily difficult.
 
 ## Documentation Is Normative
-The project documentation is part of the specification, not optional prose.
+Project documentation is part of the specification, not optional prose.
 
-Priority when sources conflict:
-1. Approved ADRs
-2. Approved architecture documents
-3. Approved concept documents
-4. GitHub Issue requirements
-5. Implementation details
+Authority is separated by concern rather than by one global priority stack:
 
-If an implementation conflicts with an approved higher-priority document, the implementation is considered incorrect unless the document is updated through the normal design process.
+1. **Final gameplay behaviour:** the owning Approved Concept is authoritative.
+2. **Cross-concept capability composition:** the owning Approved Feature is authoritative only for composition and handoffs and may not contradict Concepts.
+3. **Delivery scope:** the owning Approved Milestone is authoritative for that delivery and may not contradict Features or Concepts.
+4. **Technical implementation:** approved Architecture and ADRs are authoritative for technical decisions inside the product constraints above.
+5. **Implementation work:** GitHub Issues and code must satisfy the owning higher-level documents.
+
+An Architecture document or ADR may not silently override final-game behaviour defined by an Approved Concept. If gameplay must change, update the Concept explicitly.
 
 ## Documentation Rules
-- Every concept and architecture document must use its repository template.
+- Every Concept, Feature, Milestone and Architecture document must use its repository template.
 - Every substantial document must contain a table of contents.
 - Related documents must be linked using relative Markdown links.
-- When referring to another defined system, link to the relevant document and, when useful, directly to its heading.
+- When referring to another defined system/capability, link to the relevant document and heading when useful.
 - Documents must declare status and version.
-- Approved documents may only be contradicted by an explicit update or ADR.
-- Concrete formulas, units, ranges, defaults, constraints and edge cases belong in architecture documents when they are required for implementation.
-- Do not leave implementation-critical decisions for the Implementer to invent.
+- `Planned` means deliberately incomplete and non-normative.
+- Approved documents may only be changed through an explicit update in the owning layer.
+- A gameplay rule must have one Concept owner; Features compose it and Milestones scope it.
+- Do not leave implementation-critical gameplay decisions for the Implementer to invent.
+
+## Missing Concept Rule
+When Feature or Milestone planning reveals a required game system that has no Concept:
+
+1. create a stable concept title and ownership purpose;
+2. create `docs/concepts/<topic>.md` using `docs/templates/concept-stub.md`;
+3. set `Status: Planned` and `Version: 0.0`;
+4. update `docs/concepts/README.md`;
+5. link it from the requiring Feature;
+6. do not put guessed gameplay rules in the stub.
+
+The Concept must later go through the normal structured design process before it can be Approved.
 
 ## Data-Driven Rule
 All values expected to be changed without changing program behaviour belong outside production TypeScript where practical.
@@ -128,25 +164,29 @@ When real subagents are supported, use the named specialist agents configured un
 Canonical Codex workflow: `agents/workflows/full-development-cycle.md`.
 
 ## Required Development Workflow
-### Gameplay stage – ChatGPT
-1. **Concept Writer** develops and maintains the gameplay/system concept with the user.
-2. The concept is approved and becomes the handoff contract under `docs/concepts/**`.
+### Gameplay/product stage – ChatGPT
+1. **Concept Writer** develops detailed final-game Concepts with the user.
+2. Required Concepts are explicitly approved.
+3. **Feature design** composes multiple Concepts and resolves cross-concept ownership/handoffs.
+4. Required Features are explicitly approved.
+5. **Milestone design** groups multiple Features/feature slices into a delivery target and evaluates implementation readiness.
+6. The Milestone is handed to Codex only when `Implementation Readiness: Ready` unless the user explicitly requests an earlier technical exploration.
 
 ### Technical stage – Codex
-3. **Orchestrator** validates the approved concept and delegates downstream work.
-4. **Technical Architect** turns the approved gameplay concept into an implementable technical specification.
-5. **Planner** creates small, explicit GitHub Issues from approved specifications.
-6. **Implementer** implements exactly the scoped Issue and opens/updates a pull request.
-7. **Code Reviewer** reviews the pull request against Issue, concepts, architecture, ADRs and project rules.
-8. **Implementer** fixes actionable review findings.
-9. **QA / Verifier** verifies acceptance criteria and relevant regression behaviour.
-10. Merge only when the specification and quality gates are satisfied and merging is requested/authorized.
+7. **Orchestrator** validates the Milestone, Features and Concepts and delegates downstream work.
+8. **Technical Architect** turns the approved requirements into an implementable technical specification.
+9. **Planner** creates small, explicit GitHub Issues from approved specifications.
+10. **Implementer** implements exactly the scoped Issue and opens/updates a pull request.
+11. **Code Reviewer** reviews the pull request against Issue, Milestone, Features, Concepts, Architecture, ADRs and project rules.
+12. **Implementer** fixes actionable review findings.
+13. **QA / Verifier** verifies acceptance criteria and relevant regression behaviour.
+14. Merge only when the specification and quality gates are satisfied and merging is requested/authorized.
 
 ## Agent Behaviour
 - Read this file before acting.
 - Read the role file under `agents/` for the current task.
-- Read the relevant workflow under `agents/workflows/`.
-- Follow linked concepts, architecture documents and ADRs before making assumptions.
+- Read the relevant workflow.
+- Follow linked Concepts, Features, Milestones, Architecture documents and ADRs before making assumptions.
 - Do not silently broaden scope.
 - Do not invent architecture where an approved specification exists.
 - Do not silently invent or alter gameplay behaviour in Codex.
