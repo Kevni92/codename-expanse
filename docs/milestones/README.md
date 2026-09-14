@@ -94,7 +94,7 @@ Milestone documents also declare **Implementation Readiness**:
 
 ## Milestone Documents
 
-No milestone documents have been created yet.
+- [M01 – Flight Sandbox](m01-flight-sandbox.md) — **Draft** / **Blocked** — first executable flight sandbox validating manual inertial flight, Flight Assist, Autopilot travel and celestial/orbital context with minimal presentation.
 
 When adding a milestone:
 
