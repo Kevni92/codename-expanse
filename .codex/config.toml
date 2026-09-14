@@ -1,5 +1,5 @@
 # Project-scoped Codex multi-agent configuration for Codename Expanse.
-# GPT-5.6 in Codex requires a sufficiently recent Codex build (0.144.0+).
+# Gameplay concepts are authored in ChatGPT before the normal Codex workflow begins.
 
 [agents]
 enabled = true
@@ -7,32 +7,27 @@ max_concurrent_threads_per_session = 6
 max_depth = 1
 
 [agents.orchestrator]
-description = "Coordinates the complete Codename Expanse workflow and delegates dependent stages to specialist agents."
+description = "Coordinates the Codename Expanse technical delivery workflow from an approved gameplay concept through architecture, issues, implementation, review and QA."
 config_file = "./agents/orchestrator.toml"
 nickname_candidates = ["Orchestrator"]
 
-[agents.concept_writer]
-description = "Creates and maintains normative gameplay/system concept documents."
-config_file = "./agents/concept-writer.toml"
-nickname_candidates = ["Concept Writer"]
-
 [agents.technical_architect]
-description = "Turns approved concepts into implementation-grade technical architecture."
+description = "Turns approved gameplay concepts into implementation-grade technical architecture without changing gameplay intent."
 config_file = "./agents/technical-architect.toml"
 nickname_candidates = ["Technical Architect"]
 
 [agents.planner]
-description = "Transforms approved concepts and architecture into small implementation-ready GitHub Issues."
+description = "Transforms approved gameplay concepts and technical architecture into small implementation-ready GitHub Issues."
 config_file = "./agents/planner.toml"
 nickname_candidates = ["Planner"]
 
 [agents.implementer]
-description = "Implements exactly one scoped issue at a time with tests and no architecture invention."
+description = "Implements exactly one scoped issue at a time with tests and no gameplay or architecture invention."
 config_file = "./agents/implementer.toml"
 nickname_candidates = ["Implementer"]
 
 [agents.code_reviewer]
-description = "Reviews pull requests against issues, concepts, architecture, ADRs and project standards."
+description = "Reviews pull requests against issues, gameplay concepts, architecture, ADRs and project standards."
 config_file = "./agents/code-reviewer.toml"
 nickname_candidates = ["Code Reviewer"]
 
