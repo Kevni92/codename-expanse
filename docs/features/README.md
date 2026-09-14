@@ -94,7 +94,10 @@ Feature documents use the repository documentation status model:
 
 ## Feature Documents
 
-No feature documents have been created yet.
+- [Playable Star System](playable-star-system.md) — **Draft** — combines celestial world/orbit state with Flight Physics into a traversable star-system environment.
+- [Manual Space Flight](manual-space-flight.md) — **Draft** — combines player flight controls, Flight Assist and Flight Physics into direct ship piloting.
+- [Autopilot Travel](autopilot-travel.md) — **Draft** — combines navigation targeting, moving destination state, Autopilot, Flight Physics and handoff behaviour into autonomous travel.
+- [Flight Navigation Interface](flight-navigation-interface.md) — **Draft** — combines flight/navigation information, targeting actions and flight-system state into a coherent player interaction surface.
 
 When adding a feature:
 
