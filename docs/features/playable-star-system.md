@@ -56,7 +56,7 @@ The player can fly a ship through a star system whose celestial bodies have cohe
 | Concept | Status | Role in Feature | Required for Completion |
 | --- | --- | --- | --- |
 | [Flight Physics](../concepts/flight-physics.md) | Approved | Owns ship motion, celestial gravity interaction and physical response. | Yes |
-| [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) | Planned | Owns celestial-body state, prescribed motion, orbital relationships and orbital destination context. | Yes |
+| [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) | Draft | Owns celestial-body state, prescribed motion, orbital relationships and orbital destination context. | Yes |
 
 ## Feature Composition
 
@@ -84,13 +84,13 @@ The result is one coherent playable environment: celestial bodies provide the mo
 | --- | --- | --- | --- |
 | Ship translational/rotational physics | [Flight Physics](../concepts/flight-physics.md) | Celestial Bodies & Orbits | Celestial-body motion must not redefine ship physics. |
 | Celestial gravity effect on ships | [Flight Physics](../concepts/flight-physics.md) | Celestial Bodies & Orbits | Existing gravity rules remain authoritative. |
-| Celestial-body state and prescribed motion | [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) | Flight Physics | Exact orbital gameplay model remains to be designed. |
+| Celestial-body state and prescribed motion | [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) | Flight Physics | Concept is actively being designed; final approval remains pending. |
 | Hierarchical orbital relationships | [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) | Flight Physics | Includes relationships such as a moon orbiting a planet within a stellar system. |
 | Standard orbital destination context | [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) | Autopilot feature/concept | Required by travel features but not defined here. |
 
 ## Missing Concepts and Gaps
 
-- [ ] [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) must be fully designed and approved.
+- [ ] [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) must be completed and approved.
 
 ## Feature-Level Edge Cases
 
