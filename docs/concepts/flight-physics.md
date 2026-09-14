@@ -1,7 +1,7 @@
 # Flight Physics
 
-**Status:** Review  
-**Version:** 0.1  
+**Status:** Approved  
+**Version:** 1.0  
 **Owner:** Concept / Game Design  
 **Last Updated:** 2026-09-14
 
@@ -435,4 +435,5 @@ The following details are intentionally owned by later concepts rather than unre
 
 | Version | Date | Change |
 | --- | --- | --- |
+| 1.0 | 2026-09-14 | Approved by the project owner after concept review. |
 | 0.1 | 2026-09-14 | Initial Flight Physics concept produced from structured design session and consistency review. |
