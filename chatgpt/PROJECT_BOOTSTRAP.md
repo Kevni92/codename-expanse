@@ -8,64 +8,92 @@ https://github.com/Kevni92/codename-expanse
 Default branch: `main`
 
 ## Purpose
-This file is the only static bootstrap context that needs to be stored in the ChatGPT Project. All detailed project rules, concept-writer behaviour, workflows, templates, vision documents and gameplay concepts must be loaded from the repository at the start of each new concept session so that changes made in GitHub are picked up automatically.
+This file is the only static bootstrap context that needs to be stored in the ChatGPT Project. All detailed project rules, design-agent behaviour, workflows, templates, vision documents, concepts, features and milestones must be loaded from the repository so changes made in GitHub are picked up automatically.
 
 Do not treat an older uploaded copy of a repository document as authoritative when the current `main` branch is accessible.
 
 ## Mandatory session startup
-Before substantial gameplay concept work, load the current versions from the repository in this order:
+Before substantial gameplay/design work, load the current versions from the repository in this order:
 
 1. `AGENTS.md`
 2. `chatgpt/PROJECT_INSTRUCTIONS.md`
-3. `chatgpt/CONCEPT_WRITER_CONTEXT.md`
-4. `chatgpt/CONCEPT_SESSION_WORKFLOW.md`
-5. `agents/concept-writer.md`
-6. `agents/workflows/concept-development.md`
-7. `docs/README.md`
-8. `docs/vision/**` relevant to the current topic
-9. `docs/concepts/README.md`
-10. all existing `docs/concepts/**` documents relevant to the current topic
-11. `docs/templates/concept.md`
+3. `chatgpt/PROJECT_MEMORY.md`
+4. `chatgpt/CONCEPT_WRITER_CONTEXT.md`
+5. `chatgpt/CONCEPT_SESSION_WORKFLOW.md`
+6. `chatgpt/FEATURE_MILESTONE_WORKFLOW.md`
+7. `agents/concept-writer.md`
+8. `agents/workflows/concept-development.md`
+9. `docs/README.md`
+10. `docs/vision/**` relevant to the current topic
+11. `docs/concepts/README.md`
+12. `docs/features/README.md`
+13. `docs/milestones/README.md`
+14. existing Concepts, Features and Milestones relevant to the current topic
+15. the applicable template under `docs/templates/`
 
-Follow relative links from these documents whenever they point to additional normative context relevant to the current concept.
+Follow relative links from these documents whenever they point to additional normative context relevant to the active work.
 
 ## Freshness rule
-Always read these files from the current `main` branch at the beginning of a new concept-design session. Do not assume that repository content remembered from an earlier ChatGPT session is still current.
+Always read these files from the current `main` branch at the beginning of a new Concept, Feature or Milestone design session. Do not assume that repository content remembered from an earlier ChatGPT session is still current.
 
-If a repository file changes during the current session and the change is relevant to the active concept, reload the affected file before continuing.
+If a repository file changes during the current session and the change is relevant to the active work, reload the affected file before continuing.
 
-## Concept workflow
-ChatGPT is the gameplay and game-design workspace for Codename Expanse.
+## Documentation hierarchy
+The project separates final-game rules, capability composition and delivery scope:
 
-Normal flow:
+`Concepts -> Features -> Milestones`
 
-`Idea → structured discussion → design decisions → consistency review → concept document → explicit user approval → Codex handoff`
+- `docs/concepts/**` defines detailed, normative final-game behaviour.
+- `docs/features/**` composes multiple Concepts into coherent player-facing capabilities and explains how those Concepts interact.
+- `docs/milestones/**` composes multiple Features into concrete delivery and validation scopes.
 
-The detailed process is defined by `chatgpt/CONCEPT_SESSION_WORKFLOW.md` and is mandatory.
+Features and Milestones must never silently redefine gameplay rules owned by Concepts.
 
-Do not immediately convert the user's first description into a final concept document. Explore the idea, identify existing constraints, challenge weak or conflicting proposals, make useful suggestions, and resolve material decisions through small structured question rounds.
+## Workflow selection
+When the user asks about a **Concept**, follow `chatgpt/CONCEPT_SESSION_WORKFLOW.md`.
+
+When the user asks about a **Feature** or **Milestone**, follow `chatgpt/FEATURE_MILESTONE_WORKFLOW.md`.
+
+Do not immediately turn the user's first description into a final document. Explore boundaries, dependencies, interactions and missing ownership through structured discussion.
+
+## Missing dependency rule
+Feature and Milestone planning may legitimately reveal gameplay Concepts that do not exist yet.
+
+When a required Concept is missing:
+
+1. determine its stable title and intended ownership boundary;
+2. create `docs/concepts/<topic>.md` using `docs/templates/concept-stub.md`;
+3. mark it `Planned` / version `0.0`;
+4. add it to `docs/concepts/README.md`;
+5. link it from the requiring Feature;
+6. leave detailed gameplay behaviour for a later normal Concept session.
+
+A Planned Concept stub is intentionally incomplete and non-normative.
 
 ## Repository output
-The final artifact of a concept session is normally:
+Use the document type that matches the user's request:
 
-`docs/concepts/<topic>.md`
+- Concept: `docs/concepts/<topic>.md`
+- Feature: `docs/features/<topic>.md`
+- Milestone: `docs/milestones/mNN-<topic>.md`
 
-It must use the current repository template and follow all current repository documentation rules.
+Update the corresponding README/index whenever a document is created, renamed or materially reclassified.
 
-When a concept is created, renamed or materially reclassified, update:
+## Approval and readiness
+Concepts, Features and Milestones must remain below `Approved` until explicitly approved by the project owner.
 
-`docs/concepts/README.md`
+A Feature cannot be Approved while a required Concept is not Approved.
 
-Cross-link related concepts using relative Markdown links.
-
-A concept must remain `Draft` or `Review` until the user explicitly approves it. Only then may it be marked `Approved` and handed to Codex.
+A Milestone may have approved scope while still declaring `Implementation Readiness: Blocked`. It becomes `Ready` only when the required Feature slices resolve to Approved Concepts and no gameplay behaviour is left for Codex to invent.
 
 ## Boundary to Codex
-ChatGPT owns gameplay concepts. Codex owns the normal downstream technical workflow:
+The normal downstream handoff is:
 
-`Approved Gameplay Concept → Technical Architecture → Issues → Implementation → Review → Fixes → QA`
+`Approved Concepts -> Approved Features -> Approved/Ready Milestone -> Technical Architecture -> Issues -> Implementation -> Review -> Fixes -> QA`
+
+Concepts remain the normative gameplay source throughout downstream work. Features define composition; Milestones define delivery scope; Codex defines technical implementation.
 
 Do not silently continue into technical architecture or implementation unless the user explicitly asks for an exception.
 
 ## Repository access failure
-If the repository or required files cannot be accessed in the current session, say so clearly before doing normative concept work. Do not pretend to have loaded current repository context and do not silently rely on potentially stale remembered copies.
+If the repository or required files cannot be accessed in the current session, say so clearly before doing normative design work. Do not pretend to have loaded current repository context and do not silently rely on potentially stale remembered copies.
