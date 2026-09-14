@@ -1,70 +1,126 @@
-# ChatGPT Project Setup – Concept Design
+# ChatGPT Project Setup – Game Design
 
-ChatGPT is the collaborative game-design workspace for Codename Expanse. Its normal deliverable is a reviewed gameplay concept under `docs/concepts/`, ready to hand off to Codex.
+ChatGPT is the collaborative game-design workspace for Codename Expanse.
+
+The design handbook uses three deliberate layers:
+
+`Concepts -> Features -> Milestones`
+
+- **Concepts** define detailed final-game gameplay/system behaviour.
+- **Features** compose multiple Concepts into coherent player-facing capabilities and explain their interactions.
+- **Milestones** compose multiple Features into concrete delivery/validation scopes.
+
+The normal Codex technical workflow begins only after the relevant Milestone is approved and `Implementation Readiness` is `Ready`.
 
 ## Files to use as project context
-The ChatGPT Project should have access to the repository. At minimum, ensure these files are available as project sources:
+The ChatGPT Project should have repository access. At minimum, ensure these files are available as project sources.
 
 ### Always-relevant context
 - `AGENTS.md`
 - `chatgpt/PROJECT_INSTRUCTIONS.md`
+- `chatgpt/PROJECT_MEMORY.md`
 - `chatgpt/CONCEPT_WRITER_CONTEXT.md`
 - `chatgpt/CONCEPT_SESSION_WORKFLOW.md`
+- `chatgpt/FEATURE_MILESTONE_WORKFLOW.md`
 - `agents/concept-writer.md`
 - `agents/workflows/concept-development.md`
-- `docs/templates/concept.md`
+- `docs/README.md`
 - `docs/vision/**`
 - `docs/concepts/README.md`
+- `docs/features/README.md`
+- `docs/milestones/README.md`
+- `docs/templates/concept.md`
+- `docs/templates/concept-stub.md`
+- `docs/templates/feature.md`
+- `docs/templates/milestone.md`
 
 ### Dynamic context
-- all approved `docs/concepts/**` documents;
-- any Draft/Review concept directly related to the current topic.
+- all Approved Concepts relevant to the current topic;
+- any Draft/Review/Planned Concept directly related to the current topic;
+- relevant Feature documents;
+- relevant Milestone documents.
 
-## Project instructions
-Paste the contents of `chatgpt/PROJECT_INSTRUCTIONS.md` into the ChatGPT Project instructions.
+## Project bootstrap
+The preferred static project source is `chatgpt/PROJECT_BOOTSTRAP.md`.
 
-The other files provide detailed working context and should be available to the project as sources.
+That bootstrap instructs ChatGPT to reload the current repository-backed rules and workflows at the start of design sessions so repository changes take effect without maintaining a large static prompt.
 
-## Starting a new concept session
-A new session does not need a large bootstrap prompt. State the concept you want to work on and any initial idea or goal.
+## Starting a Concept session
+State the game system you want to design and any initial intent.
 
-Example intent:
+ChatGPT should follow `chatgpt/CONCEPT_SESSION_WORKFLOW.md`, design the intended final-game behaviour in detail and avoid temporary Milestone shortcuts.
 
-`Ich möchte heute das Gameplay-Konzept für Flight & Navigation ausarbeiten. Ausgangspunkt: ...`
+## Starting a Feature session
+State the coherent player-facing capability you want to compose.
 
-ChatGPT should then follow the mandatory concept-session workflow instead of immediately writing the final Markdown document.
+ChatGPT should follow `chatgpt/FEATURE_MILESTONE_WORKFLOW.md` and work through:
 
-## Expected session behaviour
-The Concept Writer should:
-1. load existing context and related concepts;
-2. frame the design problem and scope;
-3. summarize existing decisions and assumptions;
-4. discuss ideas with the user;
-5. propose improvements where useful;
-6. challenge conflicting or weak ideas with concrete reasoning;
-7. resolve missing decisions through small structured question rounds;
-8. define the normative gameplay model;
-9. check consistency against the handbook;
-10. recap decisions;
-11. create/update the concept document when mature enough;
-12. mark it Approved only after explicit user approval.
+1. player capability and boundary;
+2. required multiple Concepts;
+3. how those Concepts interact;
+4. ownership/handoffs;
+5. missing Concept dependencies;
+6. cross-concept edge cases;
+7. Feature acceptance criteria and completion blockers.
 
-## Repository result
-The normal output is:
+If a required Concept is missing, ChatGPT creates a `Planned` Concept stub and adds it to the Concept index rather than inventing gameplay rules inside the Feature.
 
-`docs/concepts/<topic>.md`
+## Starting a Milestone session
+State what playable development step you want to deliver or validate.
 
-and an updated:
+ChatGPT should follow `chatgpt/FEATURE_MILESTONE_WORKFLOW.md` and work through:
 
-`docs/concepts/README.md`
+1. delivery/validation goal;
+2. the multiple Features required;
+3. required capability slice from each Feature;
+4. explicit deferred/out-of-scope capabilities;
+5. dependency/readiness status;
+6. missing Feature/Concept documents;
+7. Milestone acceptance criteria;
+8. blockers before Codex handoff.
 
-Related concept documents should be connected with relative Markdown links.
+A Milestone may exist while dependencies are incomplete. It remains `Implementation Readiness: Blocked` until Codex can proceed without inventing gameplay/product behaviour.
+
+## Planned dependency documents
+A Feature or Milestone may identify a required game system before its detailed Concept has been designed.
+
+Create such a dependency with `docs/templates/concept-stub.md`:
+
+- Status: `Planned`
+- Version: `0.0`
+- only title, intended ownership, dependency reason and known boundaries
+- no invented gameplay rules
+
+Later Concept work expands the stub through the normal workflow.
+
+## Expected design behaviour
+The design agent should:
+
+1. load current repository context;
+2. identify the correct documentation layer;
+3. frame purpose/scope before detailed writing;
+4. summarize established decisions and assumptions;
+5. challenge weak/conflicting ideas;
+6. resolve material decisions through small structured question rounds;
+7. preserve one gameplay-rule owner under Concepts;
+8. create dependency stubs where genuinely required;
+9. run consistency/readiness checks;
+10. update the correct document and index only when sufficiently defined.
+
+## Repository results
+Depending on the session type:
+
+- Concept: `docs/concepts/<topic>.md` + Concept index
+- Feature: `docs/features/<topic>.md` + Feature index
+- Milestone: `docs/milestones/mNN-<topic>.md` + Milestone index
 
 ## Handoff boundary
-Once a gameplay concept is approved, hand it to the Codex Orchestrator.
+The normal handoff is:
+
+`Approved Concepts -> Approved Features -> Approved/Ready Milestone -> Codex Orchestrator`
 
 Codex then owns:
 
-`Technical Architecture → Issues → Implementation → Review → Fixes → QA`
+`Technical Architecture -> Issues -> Implementation -> Review -> Fixes -> QA`
 
-If Codex discovers a missing gameplay decision, that decision returns to ChatGPT instead of being invented in technical architecture.
+If Codex discovers a gameplay rule gap, it returns to a Concept. If it discovers a cross-concept capability gap, it returns to a Feature. If delivery scope is unclear, it returns to the Milestone.
