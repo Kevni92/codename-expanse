@@ -1,7 +1,7 @@
 # Autopilot
 
-**Status:** Review  
-**Version:** 0.1  
+**Status:** Approved  
+**Version:** 1.0  
 **Owner:** Concept / Game Design  
 **Last Updated:** 2026-09-14
 
@@ -506,4 +506,5 @@ Until those concepts exist, their dependent Autopilot behavior is conceptually s
 
 | Version | Date | Change |
 | --- | --- | --- |
+| 1.0 | 2026-09-14 | Approved by the project owner after concept review. |
 | 0.1 | 2026-09-14 | Initial Autopilot concept produced from structured design session and consistency review. |
