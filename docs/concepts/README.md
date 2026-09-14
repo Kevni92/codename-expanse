@@ -5,8 +5,8 @@ Concept documents are handbook chapters describing game/system behaviour.
 ## Concepts
 
 - [Flight Physics](flight-physics.md) — **Approved** — inertial movement, thrust, rotation, gravity, collisions and structural loading.
-- [Flight Assist](flight-assist.md) — **Review** — manual-flight stabilization, braking, reference trajectories and position holding.
-- [Autopilot](autopilot.md) — **Review** — gravity-aware trajectory planning, rendezvous, orbital arrival and travel profiles.
+- [Flight Assist](flight-assist.md) — **Approved** — manual-flight stabilization, braking, reference trajectories and position holding.
+- [Autopilot](autopilot.md) — **Approved** — gravity-aware trajectory planning, rendezvous, orbital arrival and travel profiles.
 
 When adding a concept:
 1. copy [`../templates/concept.md`](../templates/concept.md);
