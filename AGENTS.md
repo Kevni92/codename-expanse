@@ -92,15 +92,23 @@ Every pull request should be able to run:
 
 After merge to `main`, the current production build should be deployable to GitHub Pages so the prototype can be inspected in-browser.
 
+## Orchestrator
+`agents/orchestrator.md` defines the canonical coordinator for multi-stage work. When the user asks for the complete workflow, orchestration, or explicitly asks to use the Orchestrator, the active parent agent should coordinate the specialist roles instead of collapsing the whole task into one undifferentiated implementation pass.
+
+When real subagents are supported, use the named specialist agents configured under `.codex/agents/`. Dependent stages must run in workflow order and wait for their prerequisites. Independent work may run in parallel.
+
+Canonical full workflow: `agents/workflows/full-development-cycle.md`.
+
 ## Required Development Workflow
-1. **Concept Writer** defines player-facing/system behaviour.
-2. **Technical Architect** turns approved concepts into an implementable technical specification.
-3. **Planner** creates small, explicit GitHub Issues from approved specifications.
-4. **Implementer** implements exactly the scoped Issue and opens/updates a pull request.
-5. **Code Reviewer** reviews the pull request against Issue, concepts, architecture, ADRs and project rules.
-6. **Implementer** fixes actionable review findings.
-7. **QA / Verifier** verifies acceptance criteria and relevant regression behaviour.
-8. Merge only when the specification and quality gates are satisfied.
+1. **Orchestrator** determines scope, required stages and delegates specialist work.
+2. **Concept Writer** defines player-facing/system behaviour.
+3. **Technical Architect** turns approved concepts into an implementable technical specification.
+4. **Planner** creates small, explicit GitHub Issues from approved specifications.
+5. **Implementer** implements exactly the scoped Issue and opens/updates a pull request.
+6. **Code Reviewer** reviews the pull request against Issue, concepts, architecture, ADRs and project rules.
+7. **Implementer** fixes actionable review findings.
+8. **QA / Verifier** verifies acceptance criteria and relevant regression behaviour.
+9. Merge only when the specification and quality gates are satisfied and merging is requested/authorized.
 
 ## Agent Behaviour
 - Read this file before acting.
@@ -111,3 +119,4 @@ After merge to `main`, the current production build should be deployable to GitH
 - Do not invent architecture where an approved specification exists.
 - If a specification is incomplete, identify the gap rather than burying a new design decision inside code.
 - Prefer small, reviewable changes.
+- If a runtime claims to support named subagents but the named role cannot actually be loaded, report the fallback instead of pretending the requested agent was spawned.
