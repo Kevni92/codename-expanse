@@ -4,9 +4,7 @@ Concept documents are handbook chapters describing game/system behaviour.
 
 ## Concepts
 
-- [Flight Physics](flight-physics.md) — **Review** — inertial movement, thrust, rotation, gravity, collisions and structural loading.
-
-No detailed system concepts have been approved yet.
+- [Flight Physics](flight-physics.md) — **Approved** — inertial movement, thrust, rotation, gravity, collisions and structural loading.
 
 When adding a concept:
 1. copy [`../templates/concept.md`](../templates/concept.md);
