@@ -1,7 +1,7 @@
 ---
 name: Implementation task
 about: Implement one planned slice from an Approved/Ready Milestone
- title: ""
+title: ""
 labels: "implementation"
 assignees: ""
 ---
