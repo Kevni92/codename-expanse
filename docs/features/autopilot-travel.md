@@ -63,7 +63,7 @@ The player can choose an eligible navigation destination, request autopilot trav
 | [Autopilot](../concepts/autopilot.md) | Approved | Owns route planning, travel profiles, execution, replanning, arrival and cancellation behaviour. | Yes |
 | [Flight Physics](../concepts/flight-physics.md) | Approved | Owns the authoritative physical state and ship response during travel. | Yes |
 | [Flight Assist](../concepts/flight-assist.md) | Approved | Owns assisted-flight state used by post-autopilot handoff where applicable. | Yes |
-| [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) | Planned | Owns moving celestial destination state and orbital destination context. | Yes |
+| [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) | Draft | Owns moving celestial destination state and orbital destination context. | Yes |
 | [Navigation Targeting & Actions](../concepts/navigation-targeting-actions.md) | Planned | Owns destination selection and the player's request to initiate travel. | Yes |
 
 ## Feature Composition
@@ -102,12 +102,12 @@ The feature therefore turns player destination intent into autonomous physical t
 | Destination selection and travel action | [Navigation Targeting & Actions](../concepts/navigation-targeting-actions.md) | Autopilot | UI presentation must not own these gameplay semantics. |
 | Route planning/execution and profiles | [Autopilot](../concepts/autopilot.md) | Flight Physics, Celestial Bodies & Orbits | Existing approved Autopilot rules remain authoritative. |
 | Ship movement and rotation | [Flight Physics](../concepts/flight-physics.md) | Autopilot | Autopilot cannot bypass ship physics. |
-| Celestial destination motion/orbital context | [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) | Autopilot | Exact world/orbit model remains to be designed. |
+| Celestial destination motion/orbital context | [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) | Autopilot | Concept is actively being designed; final approval remains pending. |
 | Post-autopilot assisted state | [Flight Assist](../concepts/flight-assist.md) | Autopilot | Handoff uses the current physical state. |
 
 ## Missing Concepts and Gaps
 
-- [ ] [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) must be fully designed and approved.
+- [ ] [Celestial Bodies & Orbits](../concepts/celestial-bodies-orbits.md) must be completed and approved.
 - [ ] [Navigation Targeting & Actions](../concepts/navigation-targeting-actions.md) must be fully designed and approved.
 
 ## Feature-Level Edge Cases
