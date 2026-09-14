@@ -71,7 +71,11 @@ Autopilot direction established in the current design session:
 - when a sudden collision risk appears, Autopilot may immediately fly a safe avoidance maneuver and then replan;
 - if damage changes available thrust or maneuver authority, Autopilot replans using the new capability and aborts only if the target can no longer be reached safely;
 - if the navigation target becomes invalid, Autopilot aborts in a controlled manner and hands the current motion state back to Flight Assist rather than continuing toward a stale position;
-- incoming hostile fire does not automatically cancel Autopilot; the player decides whether to take manual control.
+- incoming hostile fire does not automatically cancel Autopilot; the player decides whether to take manual control;
+- Autopilot collision avoidance covers navigational hazards such as ships, asteroids and debris, but does not actively dodge weapon projectiles;
+- Autopilot does not fire weapons or activate defensive modules; combat automation is owned by separate systems;
+- Autopilot may remain active during combat as long as the player does not manually take over and the planned route remains viable;
+- before activation, the planned route exposes at least expected travel time, selected profile, major thrust/coasting phases and known route risks so the player can make an informed choice.
 
 ### Detection / propulsion signature premise
 
