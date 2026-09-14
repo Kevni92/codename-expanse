@@ -37,6 +37,20 @@ This premise originated during flight/autopilot design but is intentionally reta
 - The intended systemic trade-off is **travel time vs. propulsion exposure / detectability**.
 - Exact sensor equations, signature falloff, detector ranges, thermal behaviour and detection thresholds are not defined here and belong to the future Sensor/Detection concept.
 
+### Ship heat, thermal management and thermal signatures
+
+This premise originated during celestial-body design but is intentionally retained because it directly affects later **Ships, Modules, Weapons, Propulsion, Thermal Management, Sensors/Detection and Stealth** concepts:
+
+- Ships accumulate internal heat from high-energy activity such as sustained or overloaded propulsion and laser-weapon use.
+- Ships have a baseline passive rate at which excess heat can be rejected to space.
+- Ship/module choices may improve passive heat rejection.
+- Active heat-ejection systems may deliberately remove stored heat more quickly.
+- Excessive thermal load can overheat ship systems and eventually cause damage; the exact thresholds and damage model belong to later owning concepts.
+- Proximity to strong stellar radiation can add external thermal load and may cause warnings, system problems, overheating or hull/system damage when a ship approaches a star too closely.
+- **Heat is also a sensor-relevant signature.** Thermal management therefore serves both survivability/performance and stealth.
+- A stealth-oriented ship should be able to manage, store and/or reject heat in ways that reduce detectable thermal exposure, with trade-offs defined by later Thermal and Sensor/Detection concepts.
+- Exact heat equations, capacities, dissipation rates, heat-ejector mechanics, signature equations and sensor thresholds are intentionally deferred to their owning future concepts.
+
 ## Maintenance rule
 
 Add an entry only when a decision from the current discussion has clear relevance to a **different future topic**. Keep entries concise and topic-agnostic. Do not use this file as a running session log.
