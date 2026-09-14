@@ -84,6 +84,10 @@ Stealth Autopilot profile decisions:
 - Stealth may use long ballistic/coasting phases and only short necessary corrections.
 - Stealth plans braking so that large, easily detected braking burns near the destination are avoided where possible.
 - If current momentum and gravity permit a fully passive transfer to the required destination state, Stealth may choose a completely thrust-free trajectory.
+- If positions/ranges of relevant detectors are known, Stealth includes them in route planning.
+- Stealth may choose substantial detours when they reduce propulsion exposure within known sensor coverage.
+- Stealth does **not** wait for a later, more favorable departure window; when engaged, it plans for immediate departure.
+- If no truly low-exposure route exists, Stealth chooses the lowest-exposure feasible route and warns the player about the remaining detection risk.
 
 The exact sensor equations, signature falloff, detector ranges, thermal model and detection thresholds are **not decided here** and belong to later Sensor/Detection concepts.
 
