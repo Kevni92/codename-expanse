@@ -67,7 +67,11 @@ Autopilot direction established in the current design session:
 - third-body gravity may perturb the orbit later;
 - direct station targets in planetary orbit are intercepted directly without requiring an intermediate standard planetary orbit;
 - Efficient minimizes required thrust / delta-v and favors coasting and favorable gravity trajectories;
-- Autopilot may deliberately use gravity assists; Fast uses them only when they reduce travel time, while Safe avoids aggressive close approaches.
+- Autopilot may deliberately use gravity assists; Fast uses them only when they reduce travel time, while Safe avoids aggressive close approaches;
+- when a sudden collision risk appears, Autopilot may immediately fly a safe avoidance maneuver and then replan;
+- if damage changes available thrust or maneuver authority, Autopilot replans using the new capability and aborts only if the target can no longer be reached safely;
+- if the navigation target becomes invalid, Autopilot aborts in a controlled manner and hands the current motion state back to Flight Assist rather than continuing toward a stale position;
+- incoming hostile fire does not automatically cancel Autopilot; the player decides whether to take manual control.
 
 ### Detection / propulsion signature premise
 
