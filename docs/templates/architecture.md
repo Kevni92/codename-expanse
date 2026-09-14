@@ -5,6 +5,12 @@
 **Owner:** Technical Architecture  
 **Last Updated:** YYYY-MM-DD
 
+**Target Milestone:**
+- [Milestone](../milestones/mNN-example.md)
+
+**Implements Features:**
+- [Feature](../features/example.md)
+
 **Implements Concepts:**
 - [Concept](../concepts/example.md)
 
@@ -14,41 +20,53 @@
 ## Table of Contents
 
 1. [Purpose and Responsibility](#purpose-and-responsibility)
-2. [Scope](#scope)
-3. [Constraints and Invariants](#constraints-and-invariants)
-4. [System Context](#system-context)
-5. [Data Ownership and Model](#data-ownership-and-model)
-6. [Units and Coordinate Spaces](#units-and-coordinate-spaces)
-7. [Interfaces](#interfaces)
-8. [Algorithms and Mathematical Model](#algorithms-and-mathematical-model)
-9. [Runtime Behaviour](#runtime-behaviour)
-10. [Data and Configuration](#data-and-configuration)
-11. [Validation and Error Handling](#validation-and-error-handling)
-12. [Performance Requirements](#performance-requirements)
-13. [Determinism and Timing](#determinism-and-timing)
-14. [Testing Requirements](#testing-requirements)
-15. [Dependencies](#dependencies)
-16. [Security and Trust Boundaries](#security-and-trust-boundaries)
-17. [Alternatives and Trade-offs](#alternatives-and-trade-offs)
-18. [Implementation Constraints](#implementation-constraints)
-19. [Acceptance Criteria](#acceptance-criteria)
-20. [Open Questions](#open-questions)
-21. [Change Log](#change-log)
+2. [Requirement Traceability](#requirement-traceability)
+3. [Scope](#scope)
+4. [Constraints and Invariants](#constraints-and-invariants)
+5. [System Context](#system-context)
+6. [Data Ownership and Model](#data-ownership-and-model)
+7. [Units and Coordinate Spaces](#units-and-coordinate-spaces)
+8. [Interfaces](#interfaces)
+9. [Algorithms and Mathematical Model](#algorithms-and-mathematical-model)
+10. [Runtime Behaviour](#runtime-behaviour)
+11. [Data and Configuration](#data-and-configuration)
+12. [Validation and Error Handling](#validation-and-error-handling)
+13. [Performance Requirements](#performance-requirements)
+14. [Determinism and Timing](#determinism-and-timing)
+15. [Testing Requirements](#testing-requirements)
+16. [Dependencies](#dependencies)
+17. [Security and Trust Boundaries](#security-and-trust-boundaries)
+18. [Alternatives and Trade-offs](#alternatives-and-trade-offs)
+19. [Implementation Constraints](#implementation-constraints)
+20. [Acceptance Criteria](#acceptance-criteria)
+21. [Open Questions](#open-questions)
+22. [Change Log](#change-log)
 
 ## Purpose and Responsibility
 Define exactly what this technical subsystem owns.
 
+Architecture owns technical realization only. It must preserve Concept-owned gameplay behaviour, Feature composition/handoffs and target Milestone scope.
+
+## Requirement Traceability
+Trace the technical subsystem to the selected delivery requirements.
+
+| Milestone requirement / Feature slice | Feature | Owning Concept(s) | Architecture section |
+| --- | --- | --- | --- |
+| `<required capability>` | [Feature](../features/example.md) | [Concept](../concepts/example.md) | `<section>` |
+
+Do not use Architecture to fill a missing gameplay rule, Feature interaction or Milestone scope decision. Return those gaps to the owning design layer.
+
 ## Scope
-List included technical responsibilities and explicit non-responsibilities.
+List included technical responsibilities and explicit non-responsibilities. Preserve the target Milestone's deferred/out-of-scope capabilities.
 
 ## Constraints and Invariants
-Number normative constraints so Issues/reviews can reference them.
+Number normative technical constraints so Issues/reviews can reference them.
 
 1. **A-<SHORT>-001:** ...
 2. **A-<SHORT>-002:** ...
 
 ## System Context
-Describe upstream/downstream systems and ownership boundaries. Link related architecture documents.
+Describe upstream/downstream systems and ownership boundaries. Link related Architecture documents.
 
 ## Data Ownership and Model
 Define entities/value objects/state, identifiers, lifecycle and source of truth.
@@ -135,7 +153,7 @@ List rules the Planner/Implementer must preserve.
 ## Open Questions
 - [ ] ...
 
-Approved architecture must not contain implementation-blocking open questions.
+Approved Architecture must not contain implementation-blocking technical questions and must not hide unresolved product/gameplay questions.
 
 ## Change Log
 | Version | Date | Change |
