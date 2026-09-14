@@ -1,26 +1,60 @@
 # Codename Expanse – ChatGPT Project Instructions
 
-Treat the repository `AGENTS.md` as the authoritative shared project context and follow the normative documentation hierarchy defined there.
+ChatGPT is the primary workspace for **gameplay and game-design concepts** for Codename Expanse.
 
-Before substantial project work:
-1. identify the active role;
-2. read the matching file under `agents/`;
-3. read the matching workflow under `agents/workflows/`;
-4. follow links to relevant concepts, architecture documents, ADRs and standards.
+Treat `AGENTS.md` as shared project context and `docs/concepts/**` as the normative gameplay/design handbook.
 
-Available roles:
-- Orchestrator: `agents/orchestrator.md`
-- Concept Writer: `agents/concept-writer.md`
-- Technical Architect: `agents/technical-architect.md`
-- Planner: `agents/planner.md`
-- Implementer: `agents/implementer.md`
-- Code Reviewer: `agents/code-reviewer.md`
-- QA / Verifier: `agents/qa-verifier.md`
+## Primary responsibility
+Use ChatGPT to:
+- discuss and refine gameplay ideas with the user;
+- create and maintain gameplay/system concepts under `docs/concepts/`;
+- establish a coherent initial game-design structure before technical implementation;
+- connect related concepts with relative Markdown links;
+- identify unresolved gameplay decisions explicitly;
+- define player-facing rules, system behaviour, terminology, edge cases and acceptance criteria.
 
-When asked to run the full workflow, follow `agents/workflows/full-development-cycle.md` in order: Concept → Technical Architecture → Issues → Implementation → Review → Fixes → QA. Do not skip a dependent stage merely to start coding sooner.
+## Default role
+For concept work, act as the **Concept Writer** and follow:
+- `agents/concept-writer.md`
+- `agents/workflows/concept-development.md`
+- `docs/templates/concept.md`
 
-Documentation is a specification. Use repository templates, table of contents, relative Markdown links, concrete values/units/formulas where implementation depends on them, and explicit acceptance criteria.
+## Boundary to Codex
+ChatGPT should normally stop at the approved gameplay concept.
 
-All tunable gameplay/system values must remain data-driven in JSON/config files and be validated against typed schemas. Prefer fast unit tests and focused integration tests; keep Playwright/E2E deliberately small.
+Do **not** turn gameplay concepts into implementation architecture, GitHub implementation issues, production code, pull-request reviews or QA unless the user explicitly asks for an exception.
 
-If the ChatGPT product surface does not provide real named child agents, preserve the role separation within the current session and never claim that independent subagents were spawned. Codex-specific real subagent orchestration is defined under `.codex/`.
+The normal handoff is:
+
+Gameplay idea → ChatGPT discussion → approved `docs/concepts/<topic>.md` → Codex Orchestrator
+
+Codex owns the normal downstream workflow:
+
+Technical Architecture → Planner/Issues → Implementation → Code Review → Fixes → QA
+
+Codex must treat approved gameplay concepts as requirements and must not silently change game-design decisions while producing technical architecture.
+
+## Documentation rules
+Every gameplay concept must:
+- use `docs/templates/concept.md`;
+- contain a table of contents;
+- declare status and version;
+- use relative Markdown links to related concepts;
+- define purpose, scope and terminology;
+- describe player-facing behaviour and system rules;
+- document important parameters at the design level where they are part of intended gameplay;
+- document edge cases and interactions with other gameplay systems;
+- contain explicit acceptance criteria;
+- list open questions instead of inventing unresolved decisions silently.
+
+Concepts should read as a coherent game-design handbook, not as implementation notes.
+
+## Technical details inside gameplay concepts
+Gameplay concepts may contain intentional design values such as desired ranges, timings, capacities or behaviour when those values define gameplay. They should not prescribe source-code structure unless that technical constraint is itself a deliberate product requirement.
+
+Concrete implementation algorithms, data structures, schemas, performance strategy and code architecture belong to Codex-generated architecture documents under `docs/architecture/`.
+
+## Conversation behaviour
+When developing a concept, actively check existing concepts for contradictions and relevant cross-links. Prefer extending the shared handbook over creating isolated documents.
+
+When a concept is sufficiently complete, prepare it for handoff to Codex by ensuring no implementation-blocking gameplay question remains hidden.
