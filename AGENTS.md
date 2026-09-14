@@ -6,6 +6,34 @@ Codename Expanse is a high-quality browser-first prototype for a modern 2D top-d
 ## Product Direction
 The game combines readable arcade controls with a physically grounded simulation. Core themes include large-scale star systems, inertial flight, optional flight assists and autopilot, modular ships with visible hardpoints, long-range combat, layered parallax rendering, stations, NPCs, targeting of ships and subsystems, and a compact HUD.
 
+## Workspace Responsibility Split
+The project intentionally separates gameplay design from technical delivery.
+
+### ChatGPT owns gameplay design
+ChatGPT is the primary environment for:
+- gameplay ideation and discussion;
+- player-facing rules and system behaviour;
+- gameplay/system concept documents under `docs/concepts/**`;
+- concept cross-linking and handbook structure;
+- gameplay edge cases and acceptance criteria.
+
+The Concept Writer role is primarily used in ChatGPT.
+
+### Codex owns technical delivery
+Codex starts from approved gameplay concepts and owns:
+- technical architecture under `docs/architecture/**`;
+- ADRs;
+- implementation planning and GitHub Issues;
+- implementation;
+- pull-request review and review fixes;
+- QA verification.
+
+Codex must not silently alter approved gameplay behaviour. If a technical conflict requires a gameplay change, return the issue to the gameplay concept stage.
+
+Canonical project flow:
+
+`Gameplay Idea → ChatGPT Gameplay Concept → Approved Concept → Codex Technical Architecture → Issues → Implementation → Review → Fixes → QA`
+
 ## Technology Baseline
 - TypeScript is mandatory for production code.
 - Vite is the default browser build tool unless an approved ADR changes it.
@@ -93,22 +121,26 @@ Every pull request should be able to run:
 After merge to `main`, the current production build should be deployable to GitHub Pages so the prototype can be inspected in-browser.
 
 ## Orchestrator
-`agents/orchestrator.md` defines the canonical coordinator for multi-stage work. When the user asks for the complete workflow, orchestration, or explicitly asks to use the Orchestrator, the active parent agent should coordinate the specialist roles instead of collapsing the whole task into one undifferentiated implementation pass.
+`agents/orchestrator.md` defines the canonical coordinator for Codex multi-stage technical work. When the user asks for the complete Codex workflow, orchestration, or explicitly asks to use the Orchestrator, the active parent agent should coordinate specialist roles instead of collapsing the whole task into one undifferentiated implementation pass.
 
 When real subagents are supported, use the named specialist agents configured under `.codex/agents/`. Dependent stages must run in workflow order and wait for their prerequisites. Independent work may run in parallel.
 
-Canonical full workflow: `agents/workflows/full-development-cycle.md`.
+Canonical Codex workflow: `agents/workflows/full-development-cycle.md`.
 
 ## Required Development Workflow
-1. **Orchestrator** determines scope, required stages and delegates specialist work.
-2. **Concept Writer** defines player-facing/system behaviour.
-3. **Technical Architect** turns approved concepts into an implementable technical specification.
-4. **Planner** creates small, explicit GitHub Issues from approved specifications.
-5. **Implementer** implements exactly the scoped Issue and opens/updates a pull request.
-6. **Code Reviewer** reviews the pull request against Issue, concepts, architecture, ADRs and project rules.
-7. **Implementer** fixes actionable review findings.
-8. **QA / Verifier** verifies acceptance criteria and relevant regression behaviour.
-9. Merge only when the specification and quality gates are satisfied and merging is requested/authorized.
+### Gameplay stage – ChatGPT
+1. **Concept Writer** develops and maintains the gameplay/system concept with the user.
+2. The concept is approved and becomes the handoff contract under `docs/concepts/**`.
+
+### Technical stage – Codex
+3. **Orchestrator** validates the approved concept and delegates downstream work.
+4. **Technical Architect** turns the approved gameplay concept into an implementable technical specification.
+5. **Planner** creates small, explicit GitHub Issues from approved specifications.
+6. **Implementer** implements exactly the scoped Issue and opens/updates a pull request.
+7. **Code Reviewer** reviews the pull request against Issue, concepts, architecture, ADRs and project rules.
+8. **Implementer** fixes actionable review findings.
+9. **QA / Verifier** verifies acceptance criteria and relevant regression behaviour.
+10. Merge only when the specification and quality gates are satisfied and merging is requested/authorized.
 
 ## Agent Behaviour
 - Read this file before acting.
@@ -117,6 +149,7 @@ Canonical full workflow: `agents/workflows/full-development-cycle.md`.
 - Follow linked concepts, architecture documents and ADRs before making assumptions.
 - Do not silently broaden scope.
 - Do not invent architecture where an approved specification exists.
+- Do not silently invent or alter gameplay behaviour in Codex.
 - If a specification is incomplete, identify the gap rather than burying a new design decision inside code.
 - Prefer small, reviewable changes.
 - If a runtime claims to support named subagents but the named role cannot actually be loaded, report the fallback instead of pretending the requested agent was spawned.
