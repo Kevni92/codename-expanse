@@ -67,6 +67,10 @@ Features and Milestones cannot grant approval to an unfinished Concept.
 - [Flight Physics](flight-physics.md) — **Approved** — inertial movement, thrust, rotation, gravity, collisions and structural loading.
 - [Flight Assist](flight-assist.md) — **Approved** — manual-flight stabilization, braking, reference trajectories and position holding.
 - [Autopilot](autopilot.md) — **Approved** — gravity-aware trajectory planning, rendezvous, orbital arrival and travel profiles.
+- [Celestial Bodies & Orbits](celestial-bodies-orbits.md) — **Planned** — celestial-body state, prescribed/hierarchical orbital motion and orbital destination context.
+- [Player Flight Controls](player-flight-controls.md) — **Planned** — player input semantics for manual and assisted flight control.
+- [Navigation Targeting & Actions](navigation-targeting-actions.md) — **Planned** — navigation-target selection, target state and player-facing navigation actions.
+- [Flight HUD & Navigation Information](flight-hud-navigation-information.md) — **Planned** — player-facing flight/navigation information and its gameplay meaning.
 
 ## Adding a Concept
 
